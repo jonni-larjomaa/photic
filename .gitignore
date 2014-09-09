@@ -1,7 +1,9 @@
 /bootstrap/compiled.php
 /vendor
 /public/gallery/photo/*.jpg
+/public/gallery/photo/*.JPG
 /public/gallery/thumbnail/*.jpg
+/public/gallery/thumbnail/*.JPG
 composer.phar
 composer.lock
 .env.*.php
