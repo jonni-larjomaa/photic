@@ -79,3 +79,10 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+// Extend authentication provider
+Auth::extend('class', function($app){
+
+    return new \DummyUserProvider();
+});
