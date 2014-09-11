@@ -11,18 +11,18 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/','GalleryController@index');
 
     // Image manipulation route
-    Route::get('/{name}/{width}/{height}', function( $name, $width, $height){
+    Route::get('/{imagename}', function( $imagename ){
 
         $img_path = Config::get("gallery.photo_path");
         $tb_path = Config::get("gallery.thumbnail_path");
 
-        if(file_exists($tb_path."/".md5($name.$width.$height).".jpg")){
-            $img = Image::make($tb_path."/".md5($name.$width.$height).".jpg");
+        if(file_exists($tb_path."/".md5($imagename."300").".jpg")){
+            $img = Image::make($tb_path."/".md5($imagename."300").".jpg");
             Log::info('fetched from cache!');
         }
         else{
-            $img = Image::make($img_path."/".$name)->fit($width,$height);
-            $img->save($tb_path."/".md5($name.$width.$height).".jpg");
+            $img = Image::make($img_path."/".$imagename)->fit(300,300);
+            $img->save($tb_path."/".md5($imagename."300").".jpg");
             Log::info('fitted new image!');
         }
 
