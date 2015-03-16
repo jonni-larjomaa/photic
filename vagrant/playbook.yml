@@ -1,0 +1,86 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  vars:
+    product: photo-gallery
+    fw_ports: 22,80
+
+  tasks:
+
+  - name: append apache user to vagrant group
+    user: name=apache groups=vagrant state=present append=yes
+
+  - name: install epel repository
+    yum: name=epel-release state=present
+
+  - name: install ius repository
+    yum: name=http://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/ius-release-1.0-13.ius.centos7.noarch.rpm state=present
+
+  - name: install lamp etc.
+    yum: name={{ item }} state=latest
+    with_items:
+        - mariadb
+        - mariadb-server
+        - httpd
+        - php56u
+        - php56u-mysql
+        - php56u-cli
+        - php56u-common
+        - php56u-mcrypt
+        - php56u-xml
+        - git
+        - libselinux-python
+        - MySQL-python
+        - wget
+
+  - name: install composer
+    shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+  - name: clean up project root from composer stuff.
+    file: path={{ item }} state=absent
+    with_items:
+      - "/vagrant/vendor"
+      - "/vagrant/bin"
+
+  - name: compose the project
+    composer: working_dir=/vagrant no_dev=no
+    sudo_user: vagrant
+
+  - name: link public folder to www-root
+    file: src=/vagrant/public dest=/var/www/html/{{ product }} state=link
+
+  - name: write the apache config file
+    template: src=templates/httpd.conf dest=/etc/httpd/conf.d/{{ product }}.conf
+
+  - name: set apache umask
+    shell: grep "umask 002" /etc/sysconfig/httpd || echo "umask 002" >> /etc/sysconfig/httpd
+
+  - name: ensure services are running
+    service: name={{ item }} state=restarted enabled=yes
+    with_items:
+        - httpd
+        - mariadb
+
+  - name: add vagrant user to mysql
+    mysql_user: name={{ product }} password={{ product }} priv={{ product }}.*:ALL state=present login_user=root login_password=
+
+  - name: add webshop database
+    mysql_db: name={{ product }} state=present login_user=root login_password=
+
+  - name: migrate and seed database
+    shell: cd /vagrant ; php artisan migrate --seed
+
+  - name: set /vagrant folder as default chdir location
+    shell: grep "cd /vagrant" /home/vagrant/.bashrc || echo "cd /vagrant" >> /home/vagrant/.bashrc
+    sudo_user: vagrant
+
+  - name: set /vagrant/bin to PATH
+    lineinfile: line="export PATH=$PATH:/vagrant/bin" dest=/home/vagrant/.bashrc
+    sudo_user: vagrant
+
+  - name: set motd
+    template: src=templates/motd dest=/etc/motd owner=root group=root mode=0755
+
+  - name: disable selinux
+    selinux: state=disabled
