@@ -63,13 +63,17 @@
         - mariadb
 
   - name: add vagrant user to mysql
-    mysql_user: name={{ product }} password={{ product }} priv={{ product }}.*:ALL state=present login_user=root login_password=
+    mysql_user: name={{ item.user }} password={{ item.password }} priv={{ item.priv }} state={{ item.state }} login_user=root login_password=
+    with_items:
+      - { user: "gallery", password: "foobar123", priv: "*.*:ALL", state: "present" }
 
   - name: add webshop database
-    mysql_db: name={{ product }} state=present login_user=root login_password=
+    mysql_db: name={{ item }} state=present login_user=root login_password=
+    with_items:
+      - gallery
 
-  - name: migrate and seed database
-    shell: cd /vagrant ; php artisan migrate --seed
+  #- name: migrate and seed database
+  #  shell: cd /vagrant ; php artisan migrate --seed
 
   - name: set /vagrant folder as default chdir location
     shell: grep "cd /vagrant" /home/vagrant/.bashrc || echo "cd /vagrant" >> /home/vagrant/.bashrc
@@ -79,8 +83,8 @@
     lineinfile: line="export PATH=$PATH:/vagrant/bin" dest=/home/vagrant/.bashrc
     sudo_user: vagrant
 
-  - name: set motd
-    template: src=templates/motd dest=/etc/motd owner=root group=root mode=0755
+  #- name: set motd
+  #  template: src=templates/motd dest=/etc/motd owner=root group=root mode=0755
 
   - name: disable selinux
     selinux: state=disabled

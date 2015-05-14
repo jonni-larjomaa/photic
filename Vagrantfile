@@ -2,11 +2,17 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+ config.vbguest.auto_update = false
+
   config.vm.box = "chef/centos-7.0"
   config.vm.hostname = "photo-gallery"
 
   config.vm.synced_folder ".", "/vagrant"
+
   config.vm.synced_folder "./app/storage", "/vagrant/app/storage",
+      owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=664"]
+
+  config.vm.synced_folder "./public", "/vagrant/public",
     owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=664"]
 
   config.vm.network "private_network", ip: "10.10.10.10"

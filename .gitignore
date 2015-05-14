@@ -2,11 +2,17 @@
 /vendor
 /public/gallery/photo/*.jpg
 /public/gallery/photo/*.JPG
+/public/gallery/photo/*.PNG
+/public/gallery/photo/*.png
 /public/gallery/thumbnail/*.jpg
 /public/gallery/thumbnail/*.JPG
+/public/gallery/thumbnail/*.png
+/public/gallery/thumbnail/*.PNG
 composer.phar
 /.env.*.php
 /.env.php
 .DS_Store
 Thumbs.db
 /.idea
+/.vagrant
+/bin
