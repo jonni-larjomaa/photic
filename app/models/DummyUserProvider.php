@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Auth\GenericUser;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\UserProviderInterface;
-use \Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\GenericUser,
+    Illuminate\Auth\UserInterface,
+    Illuminate\Auth\UserProviderInterface,
+    Illuminate\Support\Facades\Hash;
 
 class DummyUserProvider implements UserProviderInterface
 {
@@ -19,7 +19,7 @@ class DummyUserProvider implements UserProviderInterface
     }
 
     
-    public function validateCredentials(\Illuminate\Auth\UserInterface $user, array $credentials) 
+    public function validateCredentials(UserInterface $user, array $credentials)
     {
         if(Hash::check($credentials['password'], $user->password) &&
                 $credentials['username'] === $user->username)
@@ -47,7 +47,7 @@ class DummyUserProvider implements UserProviderInterface
         return new \Exception('not implemented');
     }
 
-    public function updateRememberToken(\Illuminate\Auth\UserInterface $user, $token) 
+    public function updateRememberToken( UserInterface $user, $token)
     {
         return new \Exception('not implemented');
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Wedding photo gallery</title>
+        <title>Laravel Photo Gallery</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         
         <!-- Latest compiled and minified CSS -->
