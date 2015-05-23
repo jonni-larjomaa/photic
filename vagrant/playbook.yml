@@ -29,6 +29,7 @@
         - php56u-common
         - php56u-mcrypt
         - php56u-xml
+        - php56u-gd
         - git
         - libselinux-python
         - MySQL-python
