@@ -15,13 +15,13 @@ class GalleryController extends BaseController {
 
         Log::info('Loading image: '.$imagename . ' widht: '. $width . ' height: ' . $height);
 
-        if(file_exists($tb_path."/".md5($imagename."300").".jpg")){
-            $img = Image::make($tb_path."/".md5($imagename."300").".jpg");
+        if(file_exists($tb_path."/".md5($imagename.$width.$height).".jpg")){
+            $img = Image::make($tb_path."/".md5($imagename.$width.$height).".jpg");
             Log::info('fetched from cache!');
         }
         else{
-            $img = Image::make($img_path."/".$imagename)->fit(300,300);
-            $img->save($tb_path."/".md5($imagename."300").".jpg");
+            $img = Image::make($img_path."/".$imagename)->fit($width,$height);
+            $img->save($tb_path."/".md5($imagename.$width.$height).".jpg");
             Log::info('fitted new image!');
         }
 

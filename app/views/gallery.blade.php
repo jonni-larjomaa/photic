@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container content">
+<div class="container">
     <div class="row">
-        <h1>Kuvat</h1>
+        <h1>Gallery</h1>
         <hr class="featurette-divider" id="albums">
         @foreach ($images as $image)
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
