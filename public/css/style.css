@@ -1,95 +1,20 @@
-@import url(http://fonts.googleapis.com/css?family=Niconne);
-
-p
+body
 {
-    margin-left: 20px;
+    padding-top: 15px;
 }
+
 h1
 {
-    font-size: 3.5em;
-    font-family: 'Niconne';
+    padding-left: 15px;
 }
-.img-center
+.dropzone
 {
-    margin: auto auto;
-}
-.content
-{
-    background-color: #FFF;
-    padding: 50px;
-}
-.carousel-inner .item img 
-{ 
-    margin-left: auto; 
-    margin-right: auto;
-    max-height: 500px;
+    border: 2px dashed dodgerblue;
     width: 100%;
-}
-.navbar .navbar-nav 
-{
-  display: inline-block;
-  float: none;
-}
-.navbar .navbar-collapse 
-{
-  text-align: center;
-  font-weight: 900;
-}
-.glyphicon{
-    color: black;
-}
-.text-center
-{
-    text-align: center;
-}
-.strong
-{
-    font-weight: bold;
-}
-.no-close .ui-dialog-titlebar-close
-{
-    display: none;
-}
-.login fieldset 
-{
-    padding: 5%;
-}
-.btn-login
-{
-    background-color: #de47ac;
-    color: #fff;
-}
-.btn-login:hover,
-.btn-login:focus
-{
-    background-color: #cb60b3;
-    color: #fff;
-}
-.login
-{
-    padding-top: 5%;
-}
-.panel-heading-inverse
-{
-    
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background-color: #333;
-    background-repeat: repeat-x;
-    color: #DDDDDD;
-    padding: 10px 15px;
-}
-.remove,
-.remove:hover
-{
-    text-decoration: none;
-}
-.remove
-{
-    color: #ce8483;
+    height: 200px;
 }
 
-.remove:hover
+.dz-message
 {
-    color: #c9302c;
+    font-weight: bold;
 }

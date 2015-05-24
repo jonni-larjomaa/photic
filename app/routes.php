@@ -2,7 +2,8 @@
 
 //gallery index route
 Route::get('/','GalleryController@index');
-
+Route::get('/upload', 'UploadController@index');
+Route::post('/upload', 'UploadController@uploadImage');
 // Image manipulation route
 Route::get('/{imagename}/{width}/{height}', 'GalleryController@image');
 

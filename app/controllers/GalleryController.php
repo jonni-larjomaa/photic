@@ -5,7 +5,7 @@ class GalleryController extends BaseController {
 	public function index()
     {
             $imgs = $this->fetchImagesArray();
-            return View::make('gallery')->with($imgs);    
+            return View::make('gallery.index')->with($imgs);
 	}
 
     public function image($imagename, $width, $height)

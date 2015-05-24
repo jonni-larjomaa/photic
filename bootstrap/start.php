@@ -25,10 +25,8 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-
-	'local' => array('faraway'),
+	'local' => array('photo-gallery'),
 	'production' => array('atlas'),
-
 ));
 
 /*

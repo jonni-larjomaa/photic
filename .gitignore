@@ -1,13 +1,7 @@
 /bootstrap/compiled.php
 /vendor
-/public/gallery/photo/*.jpg
-/public/gallery/photo/*.JPG
-/public/gallery/photo/*.PNG
-/public/gallery/photo/*.png
-/public/gallery/thumbnail/*.jpg
-/public/gallery/thumbnail/*.JPG
-/public/gallery/thumbnail/*.png
-/public/gallery/thumbnail/*.PNG
+/public/gallery/photo/*
+/public/gallery/thumbnail/*
 composer.phar
 /.env.*.php
 /.env.php

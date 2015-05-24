@@ -12,7 +12,7 @@
                     @if($error)
                     <p> Jotain meni vikaan! </p>
                     @endif
-                    <form accept-charset="UTF-8" method="post" action="login" role="form">
+                    <form accept-charset="UTF-8" method="post" action="" role="form">
                     <fieldset>
                         <div class="form-group">
                                 <input class="form-control" placeholder="Tunnussana" name="password" type="password" value="">
