@@ -1,46 +1,22 @@
-<?php
+<?php namespace App\Controllers;
+
+// Facades
+use View;
+use Gallery;
+
+// namespaces
+use App\Controllers\BaseController;
 
 class GalleryController extends BaseController {
 
 	public function index()
     {
-            $imgs = $this->fetchImagesArray();
-            return View::make('gallery.index')->with($imgs);
+        return View::make('gallery.index')
+            ->with(array('images' => Gallery::getImages()));
 	}
 
-    public function image($imagename, $width, $height)
+    public function image($image, $width, $height)
     {
-        $img_path = Config::get("gallery.photo_path");
-        $tb_path = Config::get("gallery.thumbnail_path");
-
-        Log::info('Loading image: '.$imagename . ' widht: '. $width . ' height: ' . $height);
-
-        if(file_exists($tb_path."/".md5($imagename.$width.$height).".jpg")){
-            $img = Image::make($tb_path."/".md5($imagename.$width.$height).".jpg");
-            Log::info('fetched from cache!');
-        }
-        else{
-            $img = Image::make($img_path."/".$imagename)->fit($width,$height);
-            $img->save($tb_path."/".md5($imagename.$width.$height).".jpg");
-            Log::info('fitted new image!');
-        }
-
-        return $img->response();
+        return Gallery::getFittedImage($image, $width, $height)->response();
     }
-
-    private function fetchImagesArray(){
-
-        $photo_path = Config::get('gallery.photo_path');
-
-        $photos = array_map(
-            function($photo) {
-                $img = explode("/",$photo);
-                return end($img);
-            },
-            glob($photo_path.'/*')
-        );
-
-        return array('images' => $photos);
-    }
-
 }
