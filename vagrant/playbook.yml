@@ -15,9 +15,9 @@
     yum: name=epel-release state=present
 
   - name: install ius repository
-    yum: name=http://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/ius-release-1.0-13.ius.centos7.noarch.rpm state=present
+    yum: name=http://dl.iuscommunity.org/pub/ius/stable/CentOS/7/x86_64/ius-release-1.0-14.ius.centos7.noarch.rpm state=present
 
-  - name: install lamp etc.
+  - name: install LAMP-stack, and other packages.
     yum: name={{ item }} state=latest
     with_items:
         - mariadb
@@ -68,13 +68,10 @@
     with_items:
       - { user: "gallery", password: "foobar123", priv: "*.*:ALL", state: "present" }
 
-  - name: add webshop database
+  - name: add photo-gallery database
     mysql_db: name={{ item }} state=present login_user=root login_password=
     with_items:
       - gallery
-
-  #- name: migrate and seed database
-  #  shell: cd /vagrant ; php artisan migrate --seed
 
   - name: set /vagrant folder as default chdir location
     shell: grep "cd /vagrant" /home/vagrant/.bashrc || echo "cd /vagrant" >> /home/vagrant/.bashrc
@@ -83,9 +80,6 @@
   - name: set /vagrant/bin to PATH
     lineinfile: line="export PATH=$PATH:/vagrant/bin" dest=/home/vagrant/.bashrc
     sudo_user: vagrant
-
-  #- name: set motd
-  #  template: src=templates/motd dest=/etc/motd owner=root group=root mode=0755
 
   - name: disable selinux
     selinux: state=disabled

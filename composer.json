@@ -15,7 +15,9 @@
 			"app/commands",
 			"app/controllers",
 			"app/models",
-			"app/tests/"
+			"app/facades",
+			"app/services",
+			"app/tests"
 		]
 	},
 	"scripts": {

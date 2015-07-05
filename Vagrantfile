@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", ip: "10.10.10.10"
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "webshop"
+    vb.name = "photo-gallery"
     vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
