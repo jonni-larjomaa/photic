@@ -3,6 +3,6 @@
 return array(
 
 	'driver' => 'eloquent',
-    'model' => 'App\Model\User',
+    'model' => 'App\Models\User',
 
 );

@@ -1,15 +1,22 @@
-<?php
+<?php namespace App\Controllers;
+
+// Facades
+use Redirect;
+use View;
+use Input;
+use Auth;
+
+// Namespaces
+use App\Controllers\BaseController;
 
 class AuthController extends BaseController {
     
     public function showLogin()
-    {
-        if(Auth::check()) return Redirect::to('/');
-        
-        return View::make('login')->with(array('error' => false));
+    {   
+        return View::make('login.index');
     }
     
-    public function handleLogin()
+    public function doLogin()
     {
        $attributes = array(
            'username' => Input::get('username'), 
@@ -20,7 +27,15 @@ class AuthController extends BaseController {
        {
           return Redirect::to('/');
        }
-       
-       return View::make('login')->with(array('error' => true));
+       else
+       {
+           return Redirect::to('/login')->with(array('fail' => 'Wrong username or bad password!'));
+       }
+    }
+    
+    public function Logout()
+    {
+        Auth::logout();
+        return Redirect::to('/');
     }
 }

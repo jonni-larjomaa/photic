@@ -1,8 +1,6 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"name": "faraway/photogallery",
+	"description": "Photo-gallery",
 	"require": {
 		"laravel/framework": "4.2.*",
         "intervention/image": "2.*"
@@ -15,6 +13,7 @@
 			"app/commands",
 			"app/controllers",
 			"app/models",
+			"app/database",
 			"app/facades",
 			"app/services",
 			"app/tests"

@@ -1,10 +1,13 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jonni
- * Date: 23/05/15
- * Time: 10:34
- */
+<?php namespace App\Controllers;
+
+// Facades
+use View;
+use Request;
+use Log;
+use Config;
+
+// namespaces
+use App\Controllers\BaseController;
 
 class UploadController extends BaseController {
 

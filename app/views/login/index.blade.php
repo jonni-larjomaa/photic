@@ -6,21 +6,28 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading-inverse">
-                    <h3 class="panel-title">Tunnussana!</h3>
+                    <h3 class="panel-title">Login</h3>
                 </div>
                 <div class="panel-body">
-                    @if($error)
-                    <p> Jotain meni vikaan! </p>
+                    <!-- if there are login errors, show them here -->
+                    @if(Session::has('fail'))
+                    <p class="errors">
+                        {{ Session::get('fail') }}
+                    </p>
                     @endif
-                    <form accept-charset="UTF-8" method="post" action="" role="form">
-                    <fieldset>
+                    {{ Form::open(array('url' => 'login', 'method' => 'post', 'role' => 'form')) }}
+                    <fieldset>                    
                         <div class="form-group">
-                                <input class="form-control" placeholder="Tunnussana" name="password" type="password" value="">
+                            {{ Form::label('username', 'Username') }}
+                            {{ Form::text('username', Input::old('username'), array('placeholder' => 'Username', 'class' => 'form-control')) }}
                         </div>
-                        <input class="form-control" name="username" type="hidden" value="haat">
-                        <input class="btn btn-lg btn-block btn-login" type="submit" value="Kirjaudu">
+                        <div class="form-group">
+                            {{ Form::label('password', 'Password') }}
+                            {{ Form::password('password',array('class' => 'form-control', 'placeholder' => 'password')) }}
+                        </div>
+                        {{ Form::submit('Login', array('class' => 'btn btn-lg btn-block btn-login')) }}
                     </fieldset>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
