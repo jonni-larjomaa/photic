@@ -36,7 +36,7 @@
         - wget
 
   - name: install composer
-    shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer creates=/usr/local/bin/composer
 
   - name: clean up project root from composer stuff.
     file: path={{ item }} state=absent
