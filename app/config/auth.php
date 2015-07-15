@@ -2,6 +2,7 @@
 
 return array(
 
-	'driver' => 'class',
+	'driver' => 'eloquent',
+    'model' => 'App\Model\User',
 
 );
