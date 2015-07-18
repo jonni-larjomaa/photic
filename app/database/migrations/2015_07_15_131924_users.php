@@ -17,6 +17,7 @@ class Users extends Migration {
             $table->string('email', 254);
             $table->string('username');
             $table->string('password');
+            $table->rememberToken();
 			$table->timestamps();
 		});
 	}

@@ -7,6 +7,15 @@ h1
 {
     padding-left: 15px;
 }
+.info ul.exif
+{
+    list-style: none;
+    padding: 0 5px;
+}
+.test
+{
+    display: block;
+}
 .dropzone
 {
     border: 2px dashed dodgerblue;

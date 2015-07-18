@@ -8,6 +8,7 @@ use Auth;
 
 // Namespaces
 use App\Controllers\BaseController;
+use App\Models\User;
 
 class AuthController extends BaseController {
     
@@ -57,7 +58,7 @@ class AuthController extends BaseController {
      */
     public function showSignup()
     {   
-        return View::make('login.index');
+        return View::make('login.signup');
     }
     
     /**
@@ -68,16 +69,17 @@ class AuthController extends BaseController {
     {
        $attributes = array(
            'username' => Input::get('username'), 
-           'password' => Input::get('password')
+           'password' => Input::get('password'),
+           'email'    => Input::get('email'),
         );
 
-       if(Auth::attempt($attributes))
+       if(User::create($attributes))
        {
-          return Redirect::route('home');
+          return Redirect::route('login');
        }
        else
        {
-           return Redirect::route('login')->with(array('fail' => 'Wrong username or bad password!'));
+           return Redirect::route('signup')->with(array('fail' => 'Wrong username or bad password!'));
        }
     }
 }

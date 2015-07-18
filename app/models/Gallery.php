@@ -73,4 +73,16 @@ class Gallery {
         return $img;
     }
     
+    /**
+     * 
+     * @param string $image absolute path to image
+     * @return array exif data as array
+     */
+    public function getExifData( $image ){
+        
+        if( IMAGETYPE_JPEG == exif_imagetype($this->imagePath.'/'.$image))
+        {
+            return @read_exif_data($this->imagePath.'/'.$image,'COMPUTED');
+        }
+    }
 }
