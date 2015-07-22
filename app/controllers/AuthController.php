@@ -5,12 +5,27 @@ use Redirect;
 use View;
 use Input;
 use Auth;
+use Validator;
+use Log;
 
 // Namespaces
 use App\Controllers\BaseController;
 use App\Models\User;
 
 class AuthController extends BaseController {
+    
+    protected $validators = array(
+                'email' => 'required|email',
+                'username' => 'required|unique:users',
+                'password' => 'required|min:8',
+                );
+    
+    protected $messages = array(
+                'required' => ':attribute field is required!',
+                'unique' => ':attribute is already in use!',
+                'password.min' => 'Passwords must be atleas 8 characters long!',
+                'email' => 'Not valid email address!'
+                );
     
     /**
      * 
@@ -34,11 +49,13 @@ class AuthController extends BaseController {
 
        if(Auth::attempt($attributes))
        {
+          Log::info(Input::get('username') . ' logged in from: ' . $_SERVER['REMOTE_ADDR']);
           return Redirect::route('home');
        }
        else
        {
-           return Redirect::route('login')->with(array('fail' => 'Wrong username or bad password!'));
+           Log::info(Input::get('username') . ' login failed, ip: ' . $_SERVER['REMOTE_ADDR']);
+           return Redirect::route('login')->with(array('msg' => 'Wrong username or bad password!'));
        }
     }
     
@@ -48,6 +65,8 @@ class AuthController extends BaseController {
      */
     public function Logout()
     {
+        Log::info(Auth::user()->username.' Logged out');
+        
         Auth::logout();
         return Redirect::route('home');
     }
@@ -67,19 +86,20 @@ class AuthController extends BaseController {
      */
     public function doSignup()
     {
-       $attributes = array(
-           'username' => Input::get('username'), 
-           'password' => Input::get('password'),
-           'email'    => Input::get('email'),
-        );
-
-       if(User::create($attributes))
-       {
-          return Redirect::route('login');
-       }
-       else
-       {
-           return Redirect::route('signup')->with(array('fail' => 'Wrong username or bad password!'));
-       }
+       
+        $validator = Validator::make(Input::all(), $this->validators, $this->messages);
+       
+        if($validator->fails())
+        {
+            return Redirect::route('signup')
+                    ->withErrors($validator->messages())
+                    ->withInput(Input::except('password'));;
+        }
+        else
+        {
+            User::create(Input::all());
+            return Redirect::route('login')
+                    ->with(array('msg' => 'Registration success, please login'));
+        }
     }
 }

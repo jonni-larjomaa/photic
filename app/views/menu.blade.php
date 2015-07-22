@@ -29,7 +29,7 @@
                     <a href="{{ route('login') }}">Login</a>
                 </li>
                 <li>
-                    <a href="{{ route('signup') }}">Sign up</a>
+                    <a href="{{ route('signup') }}">Register</a>
                 </li>
                 @endif
                 <li><a href="{{ route('about') }}">About</a></li>

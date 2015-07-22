@@ -8,10 +8,10 @@ Route::get('/{imagename}/{width}/{height}', 'App\\Controllers\\GalleryController
 
 // routing for login actions.
 Route::get('/login', array( 'uses' => 'App\\Controllers\\AuthController@showLogin', 'as' => 'login'));
-Route::post('/login','App\\Controllers\\AuthController@doLogin');
+Route::post('/login',array('uses' => 'App\\Controllers\\AuthController@doLogin', 'before' => 'csrf'));
 
 Route::get('/signup',array( 'uses' => 'App\\Controllers\\AuthController@showSignup', 'as' => 'signup'));
-Route::post('/signup','App\\Controllers\\AuthController@doSignup');
+Route::post('/signup',array( 'uses' => 'App\\Controllers\\AuthController@doSignup', 'before' => 'csrf'));
 
 // gallery routes when logged in
 Route::group(array('before' => 'auth'), function(){
