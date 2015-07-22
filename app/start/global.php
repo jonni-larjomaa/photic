@@ -49,6 +49,17 @@ Log::useFiles(storage_path().'/logs/laravel-'.date('Y-m-d').'.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+    
+    if (Config::get('app.debug') === false) {
+        switch ($code) {
+            case 403:
+                return Response::view('errors.accessdenied', array(), 403);
+            case 404:
+                return Response::view('errors.notfound', array(), 404);
+            case 500:
+                return Response::view('errors.unavailable', array(), 500);
+        }
+    }
 });
 
 /*
