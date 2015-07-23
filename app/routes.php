@@ -21,7 +21,8 @@ Route::group(array('before' => 'auth'), function(){
     Route::post('/upload', 'App\\Controllers\\UploadController@uploadImage');
 
     // User profile routes.
-    Route::get('/profile', array( 'uses' => 'App\\Controllers\\UserController@profile', 'as' => 'profile'));
+    Route::get('/profile', array( 'uses' => 'App\\Controllers\\UserController@showProfile', 'as' => 'profile'));
+    Route::post('/profile', array( 'uses' => 'App\\Controllers\\UserController@updateProfile', 'as' => 'profile.update'));
     
     // route that logs you out
     Route::get('/logout', array( 'uses' => 'App\\Controllers\\AuthController@logout', 'as' => 'logout'));
