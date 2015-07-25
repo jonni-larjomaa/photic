@@ -48,10 +48,12 @@ Log::useFiles(storage_path().'/logs/laravel-'.date('Y-m-d').'.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	Log::error($exception->getMessage());
     
     if (Config::get('app.debug') === false) {
-        switch ($code) {
+
+        switch ($code) 
+        {
             case 403:
                 return Response::view('errors.accessdenied', array(), 403);
             case 404:
@@ -60,6 +62,21 @@ App::error(function(Exception $exception, $code)
                 return Response::view('errors.unavailable', array(), 500);
         }
     }
+});
+
+App::error(function(\Illuminate\Session\TokenMismatchException $exception, $code){
+   
+    Log::error($exception->getMessage());
+    
+    $errors = array(
+        '_token' => array(
+            'Invalid CSRF token provided'
+        )
+    );
+    
+    Session::regenerateToken();
+    
+    return Redirect::back()->withInput(Input::except('_token'))->withErrors($errors);
 });
 
 /*
