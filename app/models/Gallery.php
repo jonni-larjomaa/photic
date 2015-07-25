@@ -58,16 +58,16 @@ class Gallery {
     {    
         Log::info('Loading image: '.$image . ' widht: '. $width . ' height: ' . $height);
 
-        if(file_exists($this->thumbnailPath."/".md5($image.$width.$height).".jpg"))
+        if(file_exists($this->thumbnailPath.'/'.md5($image.$width.$height).'.jpg'))
         {
-            $img = Image::make($this->thumbnailPath."/".md5($image.$width.$height).".jpg");
-            Log::info('fetched from cache!');
+            $img = Image::make($this->thumbnailPath.'/'.md5($image.$width.$height).'.jpg');
+            Log::debug('Image '.$img->filename. 'fetched from cache');
         }
         else
         {
-            $img = Image::make($this->imagePath."/".$image)->fit($width,$height);
-            $img->save($this->thumbnailPath."/".md5($image.$width.$height).".jpg");
-            Log::info('fitted new image!');
+            $img = Image::make($this->imagePath.'/'.$image)->fit($width,$height);
+            $img->save($this->thumbnailPath.'/'.md5($image.$width.$height).'.jpg');
+            Log::debug('Created new thumbnail from image: '.$img->filename);
         }
         
         return $img;
@@ -80,9 +80,6 @@ class Gallery {
      */
     public function getExifData( $image ){
         
-        if( IMAGETYPE_JPEG == exif_imagetype($this->imagePath.'/'.$image))
-        {
-            return @read_exif_data($this->imagePath.'/'.$image,'COMPUTED');
-        }
+        return Image::make($this->imagePath."/".$image)->exif();
     }
 }
