@@ -11,11 +11,18 @@ use App\Controllers\BaseController;
 
 class UploadController extends BaseController {
 
+    /**
+     * 
+     * @return View
+     */
     public function index()
     {
         return View::make('upload.index');
     }
 
+    /**
+     * @return void
+     */
     public function uploadImage()
     {
         $uploadedfile = Request::file('file');

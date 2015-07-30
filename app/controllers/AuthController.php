@@ -14,12 +14,20 @@ use App\Models\User;
 
 class AuthController extends BaseController {
     
+    /**
+     * Validator rules
+     * @var array
+     */
     protected $validators = array(
                 'email' => 'required|email',
                 'username' => 'required|unique:users',
                 'password' => 'required|min:8',
                 );
     
+    /**
+     * Validator messages
+     * @var array
+     */
     protected $messages = array(
                 'required' => ':attribute field is required!',
                 'unique' => ':attribute is already in use!',

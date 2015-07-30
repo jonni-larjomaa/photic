@@ -15,12 +15,20 @@ use App\Models\User;
 class UserController extends BaseController
 {
 
+    /**
+     * validator rules
+     * @var array 
+     */
     protected $validators = array(
                 'email' => 'required|email',
                 'password' => 'required|confirmed|min:8',
                 'password_confirmation' => 'required|min:8',
                 );
     
+    /**
+     * validator messages
+     * @var array 
+     */
     protected $messages = array(
                 'required' => ':attribute field is required!',
                 'unique' => ':attribute is already in use!',
@@ -28,12 +36,20 @@ class UserController extends BaseController
                 'confirmed' => 'Passwords do not match!',
                 );
     
+    /**
+     * 
+     * @return View
+     */
     public function showProfile()
     {
         return View::make('user.profile')
                 ->with(array('user' => Auth::user()));
     }
     
+    /**
+     * 
+     * @return Redirect
+     */
     public function updateProfile()
     {
         
