@@ -3,9 +3,10 @@
 /**
  * Used Facades.
  */
-use \Image;
-use \Config;
-use \Log;
+use Image;
+use Config;
+use Log;
+use Cache;
 
 class Gallery {
     
@@ -36,15 +37,29 @@ class Gallery {
      */
     public function getImages()
     {
-        $images = array_map(
-            function($photo) {
-                $img = explode("/",$photo);
-                return end($img);
-            },
-            glob($this->imagePath.'/*')
-        );
+        /*$images = Cache::remember(
+                    'images', 
+                    Config::get('gallery.cache_timeout'),
+                    function(){
+                        return array_map( 
+                                function($photo) {
+                                $img = explode("/",$photo);
+                                return end($img);
+                            },
+                            glob($this->imagePath.'/*')
+                        );
+                    }
+        );*/
+        
+        return array_map( 
+                function($photo) {
+                    $img = explode("/",$photo);
+                    return end($img);
+                },
+                glob($this->imagePath.'/*')
+            );
 
-        return $images;
+        // return $images;
     }
     
     /**
@@ -81,5 +96,21 @@ class Gallery {
     public function getExifData( $image ){
         
         return Image::make($this->imagePath."/".$image)->exif();
+    }
+    
+    /**
+     * 
+     * @param string $image
+     * @return boolean
+     */
+    public function removeImage( $image )
+    {
+        if(unlink($this->imagePath.'/'.$image) &&
+            unlink($this->thumbnailPath.'/'.md5($image.'300'.'300').'.jpg'))
+        {
+            return true;
+        }
+        
+        return false;
     }
 }

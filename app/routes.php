@@ -19,6 +19,9 @@ Route::group(array('before' => 'auth'), function(){
     // image uploading
     Route::get('/upload', array( 'uses' => 'App\\Controllers\\UploadController@index', 'as' => 'upload'));
     Route::post('/upload', 'App\\Controllers\\UploadController@uploadImage');
+    
+    // image removal route.
+    Route::post('/delete', array('uses' => 'App\\Controllers\\GalleryController@removeImage', 'as' => 'delete'));
 
     // User profile routes.
     Route::get('/profile', array( 'uses' => 'App\\Controllers\\UserController@showProfile', 'as' => 'profile'));

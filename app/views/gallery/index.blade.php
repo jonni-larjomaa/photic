@@ -17,7 +17,12 @@
         @foreach ($images as $image)
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" rel="gallery1" href="{{ asset('gallery/photo/'.$image) }}">
-                    <img class="gallery img-responsive" src="{{ asset($image.'/300/300') }}" alt="kuvia">
+                    <img class="gallery img-responsive" src="{{ asset($image.'/300/300') }}" alt="kuvia" />
+                    
+                    @if(Auth::check())
+                    <button class="delete"><span class="glyphicon glyphicon-trash"></span></button>
+                    @endif
+                    
                 </a>
                 <!-- @include('gallery.exif', array('exif' => Gallery::getExifData($image) )) -->
             </div>
