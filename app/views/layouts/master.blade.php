@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Laravel Photo Gallery</title>
+        <title>Photic</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta description="Laravel based image gallery" />
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
