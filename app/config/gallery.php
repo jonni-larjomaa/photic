@@ -13,8 +13,8 @@ return array(
     'thumbnail_path' => __DIR__.'/../../public/gallery/thumbnail',
     
     /**
-     * Cached image timeout
+     * Cached image timeout in minutes
      */
-    'cache_timeout' => 900
+    'cache_timeout' => 5
 );
 

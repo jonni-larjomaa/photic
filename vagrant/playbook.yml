@@ -23,6 +23,7 @@
         - mariadb
         - mariadb-server
         - httpd
+        - memcached
         - php56u
         - php56u-mysql
         - php56u-cli
@@ -31,6 +32,7 @@
         - php56u-xml
         - php56u-gd
         - php56u-mbstring
+        - php56u-memcached
         - git
         - libselinux-python
         - MySQL-python

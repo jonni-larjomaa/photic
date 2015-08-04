@@ -15,8 +15,15 @@ return array(
 	|
 	*/
 
-	'driver' => 'file',
+	'driver' => 'memcached',
 
+    /**
+     * memcached specific settings.
+     */
+    'memcached' => array(
+        array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 100),
+    ),
+    
 	/*
 	|--------------------------------------------------------------------------
 	| File Cache Location

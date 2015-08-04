@@ -37,7 +37,7 @@ class Gallery {
      */
     public function getImages()
     {
-        /*$images = Cache::remember(
+        $images = Cache::remember(
                     'images', 
                     Config::get('gallery.cache_timeout'),
                     function(){
@@ -49,17 +49,9 @@ class Gallery {
                             glob($this->imagePath.'/*')
                         );
                     }
-        );*/
-        
-        return array_map( 
-                function($photo) {
-                    $img = explode("/",$photo);
-                    return end($img);
-                },
-                glob($this->imagePath.'/*')
-            );
+        );
 
-        // return $images;
+        return $images;
     }
     
     /**
