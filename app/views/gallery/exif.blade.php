@@ -1,19 +1,19 @@
-<div class="info">
-    <ul class="exif">
+<div class="image-info">
+    <ul class="image-exif">
         <li>
-            {{ array_get($exif, 'FileName', 'N/A')}}
+            Name: <small>{{ array_get($exif, 'FileName', 'N/A')}}</small>
         </li>
         <li>
-            {{ array_get($exif, 'COMPUTED.Width', 'N/A')}}
+            W: <small>{{ array_get($exif, 'COMPUTED.Width', 'N/A')}}</small>
         </li>
         <li>
-            {{ array_get($exif, 'COMPUTED.Height', 'N/A')}}
+            H: <small>{{ array_get($exif, 'COMPUTED.Height', 'N/A')}}</small>
         </li>
         <li>
-            {{ array_get($exif, 'Model', 'N/A') }}
+            Model: <small>{{ array_get($exif, 'Model', 'N/A') }}</small>
         </li>
         <li>
-            {{ array_get($exif, 'Make', 'N/A') }}
+            Make: <small>{{ array_get($exif, 'Make', 'N/A') }}</small>
         </li>
     </ul>
 </div>

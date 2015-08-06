@@ -1,5 +1,12 @@
 $(function(){
-    $('.thumbnail').fancybox();
+    $('.thumbnail').fancybox(
+    {
+        beforeShow : function(){
+            
+            var content = $(this.element).siblings().html();
+            this.title = content;
+        }
+    });
     
     $('button.delete').click(function(e){
         e.stopPropagation();

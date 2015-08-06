@@ -7,11 +7,6 @@ h1
 {
     padding-left: 15px;
 }
-.info ul.exif
-{
-    list-style: none;
-    padding: 0 5px;
-}
 .test
 {
     display: block;
@@ -35,6 +30,23 @@ button.delete
 a.thumbnail:hover button.delete 
 {
     visibility: visible;
+}
+
+div.image-info
+{
+    //display: none;
+}
+
+div.image-info ul
+{
+    display: none;
+    list-style: none;
+    padding: 0 5px;
+}
+
+ul.image-exif li
+{
+    display: inline;
 }
 
 /* Dropzone */
